@@ -84,7 +84,7 @@ public class Linea
 
     public void setPadreA(int padreA) {
         PadreA = padreA;
-    }   
+    }
 
     public int getPadreB() {
         return PadreB;
@@ -114,10 +114,10 @@ public class Linea
         Line linea1 = new Line();
         setLain(linea1);
         linea1.setStrokeWidth(8);
-        linea1.setStartX(ax);
-        linea1.setStartY(ay);
-        linea1.setEndX(bx);
-        linea1.setEndY(by);
+        linea1.setStartX(x1);
+        linea1.setStartY(y1);
+        linea1.setEndX(x2);
+        linea1.setEndY(y2);
         anchorPane.getChildren().add(linea1);
         linea1.toBack();
         linea.add(linea1);
