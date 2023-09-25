@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.algoritmo_a_estrella.HelloController">
+  <Button fx:id="btn_draw" layoutX="29.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickButtonDibujar" text="Dibujar" />
+  <TableView fx:id="tableViewAbierta" layoutX="641.0" layoutY="245.0" prefHeight="200.0" prefWidth="228.0">
+    <columns>
+      <TableColumn fx:id="nodoAbierta" prefWidth="75.0" text="N" />
+      <TableColumn fx:id="padreAbierta" prefWidth="75.0" text="Padre" />
+      <TableColumn fx:id="fnAbierta" prefWidth="75.0" text="F(n)" />
+    </columns>
+  </TableView>
+  <TableView fx:id="tableViewCerrada" layoutX="641.0" layoutY="461.0" prefHeight="200.0" prefWidth="152.0">
+    <columns>
+      <TableColumn fx:id="nodoCerrada" prefWidth="75.0" text="N" />
+      <TableColumn fx:id="padreCerrada" prefWidth="75.0" text="Padre" />
+    </columns>
+  </TableView>
+  <TableView fx:id="NodoH" layoutX="641.0" layoutY="27.0" prefHeight="200.0" prefWidth="152.0">
+    <columns>
+      <TableColumn fx:id="nodoColumn" prefWidth="75.0" text="Nodo" />
+      <TableColumn fx:id="heuristicaColumn" prefWidth="75.0" text="H(n)" />
+    </columns>
+  </TableView>
+   <TextField fx:id="nodoFinalTextField" layoutX="441.0" layoutY="39.0" />
+   <Button fx:id="btn_cal" layoutX="370.0" layoutY="39.0" mnemonicParsing="false" onAction="#OnCalcular" text="Calcular" />
+   <TextField fx:id="nodoInicioTextField" layoutX="441.0" layoutY="14.0" />
+</AnchorPane>
