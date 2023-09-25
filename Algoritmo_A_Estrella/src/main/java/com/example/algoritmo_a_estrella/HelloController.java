@@ -39,9 +39,6 @@ public class HelloController implements Initializable
     public TextField nodoFinalTextField;
     public TextField nodoInicioTextField;
 
-    @FXML
-    private Button ejecutarAStarButton;
-
 
     public static ObservableList<Nodo> Node;
     public static Linea lineac = new Linea();
@@ -62,7 +59,6 @@ public class HelloController implements Initializable
     public static int num = 0;
     public static ObservableList<OpenList> openLists;
     public static ObservableList<CloseList> closeLists;
-    public static List<Circle> circulos = new ArrayList<>();
 
     public static boolean selectedNodo = false;
 
@@ -124,14 +120,24 @@ public class HelloController implements Initializable
                 }
             }
         }
+        for(Linea linea : Linea)
+        {
+            for(CloseList lista : closeLists)
+            {
+                if(linea.getID() == lista.getLineaID())
+                {
+                    linea.getLain().setStroke(Color.RED);
+                }
+            }
+        }
 
     }
 
     public void ObtenerListaabiertaa(Integer ID){
         double menor = 10000f;
         for(Linea linea : Linea) {
-            if (Objects.equals(ID, linea.getPadreA()) || Objects.equals(ID, linea.getPadreB())) {
-                System.out.println("Entró al IF");
+            if (Objects.equals(ID, linea.getPadreA()) || Objects.equals(ID, linea.getPadreB()))
+            {
                 int padre = ID;
                 int nodo = 0;
                 if (linea.PadreA == ID)

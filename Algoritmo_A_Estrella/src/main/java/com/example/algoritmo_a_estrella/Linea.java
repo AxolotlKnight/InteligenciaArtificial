@@ -11,24 +11,24 @@ import static java.lang.Math.sqrt;
 
 public class Linea
 {
-    Integer ID;
-    Float ax;
-    Float ay;
-    Float bx;
-    Float by;
-    Integer PadreA;
-    Integer PadreB;
-    Float Longitud;
+    int id;
+    float x1;
+    float y1;
+    float x2;
+    float y2;
+    int PadreA;
+    int PadreB;
+    float Longitud;
     AnchorPane anchorPane;
     Line lain;
 
-    public Linea(Line linea, Integer ID, Float ax, Float ay, Float bx, Float by, Integer padreA, Integer padreB, Float longitud) {
+    public Linea(Line linea, int ID, float ax, float ay, float bx, float by, int padreA, int padreB, float longitud) {
         this.lain = linea;
-        this.ID = ID;
-        this.ax = ax;
-        this.ay = ay;
-        this.bx = bx;
-        this.by = by;
+        this.id = ID;
+        this.x1 = ax;
+        this.y1 = ay;
+        this.x2 = bx;
+        this.y2 = by;
         PadreA = padreA;
         PadreB = padreB;
         Longitud = longitud;
@@ -38,76 +38,68 @@ public class Linea
 
     }
 
-    public Integer getID() {
-        return ID;
+    public int getID() {
+        return id;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setID(int ID) {
+        this.id = ID;
     }
 
-    public Float getAx() {
-        return ax;
+    public float getAx() {
+        return x1;
     }
 
-    public void setAx(Float ax) {
-        this.ax = ax;
+    public void setAx(float ax) {
+        this.x1 = ax;
     }
 
-    public Float getAy() {
-        return ay;
+    public float getAy() {
+        return y1;
     }
 
     public void setAy(Float ay) {
-        this.ay = ay;
+        this.y1 = ay;
     }
 
-    public Float getBx() {
-        return bx;
+    public float getBx() {
+        return x2;
     }
 
-    public void setBx(Float bx) {
-        this.bx = bx;
+    public void setBx(float bx) {
+        this.x2 = bx;
     }
 
-    public Float getBy() {
-        return by;
+    public float getBy() {
+        return y2;
     }
 
-    public void setBy(Float by) {
-        this.by = by;
+    public void setBy(float by) {
+        this.y2 = by;
     }
 
-    public Integer getPadreA() {
+    public int getPadreA() {
         return PadreA;
     }
 
-    public void setPadreA(Integer padreA) {
+    public void setPadreA(int padreA) {
         PadreA = padreA;
-    }
+    }   
 
-    public Integer getPadreB() {
+    public int getPadreB() {
         return PadreB;
     }
 
-    public void setPadreB(Integer padreB) {
+    public void setPadreB(int padreB) {
         PadreB = padreB;
     }
 
-    public Float getLongitud() {
+    public float getLongitud() {
         return Longitud;
     }
 
-    public void setLongitud(Float longitud) {
+    public void setLongitud(float longitud) {
         Longitud = longitud;
-    }
-
-    public AnchorPane getAnchorPane() {
-        return anchorPane;
-    }
-
-    public void setAnchorPane(AnchorPane anchorPane) {
-        this.anchorPane = anchorPane;
     }
 
     public Line getLain() {
@@ -131,10 +123,8 @@ public class Linea
         linea.add(linea1);
     }
     public void moverlinea(Nodo circulo1, double max, double may, MouseEvent mouseEvent, Boolean esPadreA, Boolean esPadreB, Circle circulo){
-        Integer i = 0;
-        //System.out.println("Id caso Antes: "+getID());
+        int i = 0;
         for (Line p1 : linea) {
-            // System.out.println("Id caso For: "+getID());
             if (p1.getStartX() == circulo.getLayoutX()&& p1.getStartY() == circulo.getLayoutY()) {
                 p1.setStartX(mouseEvent.getSceneX() - max);
                 p1.setStartY(mouseEvent.getSceneY() - may);
@@ -147,7 +137,6 @@ public class Linea
 
                 p2.setLongitud((float) sqrt((pow(p2.getAx()-p2.getBx(),2)+(pow(p2.getAy()-p2.getBy(),2)))));
                 HelloController.Linea.add(i,p2);
-                System.out.println("Id caso 1: "+getID());
 
             } else if (p1.getEndX() == circulo.getLayoutX() && p1.getEndY() == circulo.getLayoutY()) {
                 p1.setEndX(mouseEvent.getSceneX() - max);
@@ -161,7 +150,6 @@ public class Linea
 
                 line2.setLongitud((float) sqrt((pow(line2.getAx()-line2.getBx(),2)+(pow(line2.getAy()-line2.getBy(),2)))));
                 HelloController.Linea.set(i, line2);
-                System.out.println("Id caso 2: "+getID());
 
 
             }
