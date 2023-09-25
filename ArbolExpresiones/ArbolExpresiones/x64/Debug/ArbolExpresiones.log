@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\Manuel\source\repos\ArbolExpresiones\ArbolExpresiones\main.cpp(32,13): warning C4244: 'return': conversión de 'double' a 'int'; posible pérdida de datos
+  ArbolExpresiones.vcxproj -> C:\Users\Manuel\source\repos\ArbolExpresiones\x64\Debug\ArbolExpresiones.exe
