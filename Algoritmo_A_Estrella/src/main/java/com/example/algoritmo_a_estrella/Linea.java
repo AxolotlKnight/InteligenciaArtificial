@@ -11,7 +11,7 @@ import static java.lang.Math.sqrt;
 
 public class Linea
 {
-    int id;
+    Integer id;
     float x1;
     float y1;
     float x2;
@@ -22,7 +22,7 @@ public class Linea
     AnchorPane anchorPane;
     Line lain;
 
-    public Linea(Line linea, int ID, float ax, float ay, float bx, float by, int padreA, int padreB, float longitud) {
+    public Linea(Line linea, Integer ID, float ax, float ay, float bx, float by, int padreA, int padreB, float longitud) {
         this.lain = linea;
         this.id = ID;
         this.x1 = ax;
@@ -38,7 +38,7 @@ public class Linea
 
     }
 
-    public int getID() {
+    public Integer getID() {
         return id;
     }
 

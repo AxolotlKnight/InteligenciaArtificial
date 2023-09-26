@@ -20,12 +20,12 @@ import static java.lang.Math.sqrt;
 public class Nodo
 {
     Circle nodo;
-    int id;
+    Integer id;
     double x, y;
     Text text = new Text();
     double heuristica;
 
-    public Nodo(Circle nodo, int id, double x, double y, double heuristica) {
+    public Nodo(Circle nodo, Integer id, double x, double y, double heuristica) {
         this.nodo = nodo;
         this.id = id;
         this.x = x;
@@ -46,11 +46,11 @@ public class Nodo
         this.nodo = nodo;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -83,25 +83,20 @@ public class Nodo
 
     public void dibujar(AnchorPane anchorPane, Nodo nodo, MouseEvent e)
     {
-        if(e.getButton() == MouseButton.PRIMARY)
-        {
-            getNodo().setRadius(20);
-            getNodo().setFill(Color.WHITE);
-            getNodo().setStroke(Color.BLACK);
-            getNodo().setLayoutX(e.getX());
-            getNodo().setLayoutY(e.getY());
-            text.setText(String.valueOf(id));
-            text.setLayoutX(getNodo().getLayoutX());
-            text.setLayoutY(getNodo().getLayoutY());
-            boton1.crear(boton);
-            anchorPane.getChildren().add(boton);
-            anchorPane.getChildren().add(getNodo());
-            anchorPane.getChildren().add(text);
-            num++;
-            CrearLinea(boton,anchorPane);
-
-        }
-        Arrastrar(getNodo(),nodo);
+        getNodo().setRadius(20);
+        getNodo().setFill(Color.WHITE);
+        getNodo().setStroke(Color.BLACK);
+        getNodo().setLayoutX(e.getX());
+        getNodo().setLayoutY(e.getY());
+        text.setText(String.valueOf(id));
+        text.setLayoutX(getNodo().getLayoutX());
+        text.setLayoutY(getNodo().getLayoutY());
+        boton1.crear(boton);
+        anchorPane.getChildren().add(boton);
+        anchorPane.getChildren().add(getNodo());
+        anchorPane.getChildren().add(text);
+        num++;
+        CrearLinea(boton, anchorPane);
     }
 
     public static double mousex;
@@ -129,12 +124,11 @@ public class Nodo
                             boton.setLayoutY(mouseEvent.getSceneY() - mousey + 5);
                             setX((float) (mouseEvent.getSceneX() - mousex));
                             setY((float) (mouseEvent.getSceneX() - mousey));
-                            //Actualizar coordenadas en el Tableview
                             Nodo nodo1 = new Nodo();
-                            nodo1.setId(Integer.valueOf(text.getText()));
+                            nodo1.setId(Integer.parseInt(text.getText()));
                             nodo1.setX((float) (mouseEvent.getSceneX()));
                             nodo1.setY((float) (mouseEvent.getSceneY()));
-                            Node.set(Integer.parseInt(text.getText()) - 1, nodo1);
+                            Node.set(Integer.parseInt(text.getText())-1, nodo1);
 
                         }
                     }
@@ -153,23 +147,19 @@ public class Nodo
             mouseLinex = e.getX();
             mouseLiney = e.getY();
             if (selectNodo == 0) {
-                System.out.println("Linea creada");
                 nx1 = (float) getNodo().getLayoutX();
                 ny1 = (float) getNodo().getLayoutY();
-                System.out.println(nx1);
-                System.out.println(ny1);
                 nodo1 = getId();
                 esNodo1 = true;
                 esNodo2 = false;
                 selectNodo++;
             } else {
-                System.out.println("Linea 2 conectada");
                 nx2 = (float) getNodo().getLayoutX();
                 ny2 = (float) getNodo().getLayoutY();
                 nodo2 = getId();
                 esNodo2 = true;
                 esNodo1 = false;
-                Float longitud = (float) sqrt((pow(nx2 - nx1, 2) + (pow(ny2 - ny1, 2))));
+                float longitud = (float) sqrt((pow(nx2 - nx1, 2) + (pow(ny2 - ny1, 2))));
                 lineac = new Linea(linea, lineaId, nx1, ny1, nx2, ny2, nodo1, nodo2, longitud);
                 lineac.Creacion(anchorPane);
                 Linea.add(lineac);

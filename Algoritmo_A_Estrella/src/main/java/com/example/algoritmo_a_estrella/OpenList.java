@@ -2,31 +2,31 @@ package com.example.algoritmo_a_estrella;
 
 public class OpenList
 {
-    private int nodo;
-    private int padre;
+    private Integer nodo;
+    private Integer padre;
     private double fn;
-    private int linea;
+    private Integer linea;
 
-    public OpenList(int nodo, int padre, double fn, int linea) {
+    public OpenList(Integer nodo, Integer padre, double fn, Integer linea) {
         this.nodo = nodo;
         this.padre = padre;
         this.fn = fn;
         this.linea = linea;
     }
 
-    public int getNodo() {
+    public Integer getNodo() {
         return nodo;
     }
 
-    public void setNodo(int nodo) {
+    public void setNodo(Integer nodo) {
         this.nodo = nodo;
     }
 
-    public int getPadre() {
+    public Integer getPadre() {
         return padre;
     }
 
-    public void setPadre(int padre) {
+    public void setPadre(Integer padre) {
         this.padre = padre;
     }
 
@@ -38,11 +38,11 @@ public class OpenList
         this.fn = fn;
     }
 
-    public int getLinea() {
+    public Integer getLinea() {
         return linea;
     }
 
-    public void setLinea(int linea) {
+    public void setLinea(Integer linea) {
         this.linea = linea;
     }
 }

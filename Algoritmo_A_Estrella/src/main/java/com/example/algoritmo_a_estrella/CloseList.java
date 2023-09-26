@@ -2,17 +2,17 @@ package com.example.algoritmo_a_estrella;
 
 public class CloseList
 {
-    private int nodo;
-    private int padre;
-    private int lineaID;
+    private Integer nodo;
+    private Integer padre;
+    private Integer lineaID;
 
-    public CloseList(int nodo, int padre, int lineaID) {
+    public CloseList(Integer nodo, Integer padre, Integer lineaID) {
         this.nodo = nodo;
         this.padre = padre;
         this.lineaID = lineaID;
     }
 
-    public int getNodo() {
+    public Integer getNodo() {
         return nodo;
     }
 
@@ -20,7 +20,7 @@ public class CloseList
         this.nodo = nodo;
     }
 
-    public int getPadre() {
+    public Integer getPadre() {
         return padre;
     }
 
@@ -28,11 +28,11 @@ public class CloseList
         this.padre = padre;
     }
 
-    public int getLineaID() {
+    public Integer getLineaID() {
         return lineaID;
     }
 
-    public void setLineaID(int lineaID) {
+    public void setLineaID(Integer lineaID) {
         this.lineaID = lineaID;
     }
 }

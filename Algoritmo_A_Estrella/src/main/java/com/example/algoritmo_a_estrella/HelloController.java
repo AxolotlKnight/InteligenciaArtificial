@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -67,30 +68,79 @@ public class HelloController implements Initializable
         selectedNodo = true;
 
         Scene scene = this.btn_draw.getScene();
-        scene.setOnMouseClicked(evento -> {
-            Circle circle = new Circle();
-            lyx = evento.getX();
-            lyy = evento.getY();
-            Nodo nodo = new Nodo(circle, num+1, evento.getX(), evento.getY(),0f);
-            nodo.dibujar(panel,nodo,evento);
-            Node.add(nodo);
-            this.NodoH.setItems(Node);
+        scene.setOnMousePressed(evento -> {
+            if(evento.getButton() == MouseButton.PRIMARY)
+            {
+                Nodo nodo;
+                Circle circle = new Circle();
+                lyx = evento.getX();
+                lyy = evento.getY();
+                nodo = new Nodo(circle, num+1, evento.getX(), evento.getY(),0f);
+                nodo.dibujar(panel,nodo,evento);
+                Node.add(nodo);
+                NodoH.setItems(Node);
+            }
+            else
+            {
+                for(Nodo nodo: Node)
+                {
+                    if(nodo.getNodo().getBoundsInParent().contains(evento.getX(),evento.getY()));
+                    {
+                        nodo.Arrastrar(nodo.getNodo(),nodo);
+                    }
+
+                }
+            }
         });
+
+
+    }
+
+    public void onClickButtonMover(ActionEvent actionEvent)
+    {
+        int i = 0;
+
     }
 
     public static int LAID = 0;
 
     public void OnCalcular(ActionEvent actionEvent) {
+        if(!closeLists.isEmpty())
+        {
+            for(Linea linea : Linea)
+            {
+                for(CloseList lista : closeLists)
+                {
+                    if(Objects.equals(linea.getID(), lista.getLineaID()))
+                    {
+                        System.out.println(lista.getLineaID());
+                        linea.getLain().setStroke(Color.BLACK);
+                    }
+                }
+            }
+            for(Nodo nodo : Node){
+                for (CloseList lista : closeLists){
+                    if(Objects.equals(nodo.getId(), lista.getNodo())){
+
+                        nodo.getNodo().setFill(Color.WHITE);
+                    }
+                }
+            }
+        }
+        closeLists.clear();
+        openLists.clear();
+        tableViewCerrada.getItems().clear();
+        tableViewAbierta.getItems().clear();
         canmove =false;
-        Integer i = 0;
-        Integer fin = Integer.valueOf(nodoFinalTextField.getText());
+        int i = 0;
+        int fin = Integer.parseInt(nodoFinalTextField.getText());
         Nodo nodoCal = Node.get(Integer.parseInt(nodoFinalTextField.getText())-1);
         double x2 = nodoCal.getX();
         double y2 = nodoCal.getY();
         for(Nodo circulo: Node){
             double euristica = 0.0;
             Node.get(i);
-            euristica = (float) sqrt((pow(x2-Node.get(i).getX(),2)+(pow(y2-Node.get(i).getY(),2))));
+            euristica = sqrt((pow(x2-Node.get(i).getX(),2)+(pow(y2-Node.get(i).getY(),2))));
             Node.get(i).setHeuristica(euristica);
             Node.set(i,circulo);
             i++;
@@ -98,42 +148,44 @@ public class HelloController implements Initializable
 
         do {
             if (openLists.isEmpty()) {
-                int Nodo = Integer.valueOf(nodoInicioTextField.getText());
-                int Padre = Nodo;
-                Float Valor = 0f;
-                OpenList paquito = new OpenList(Nodo, Padre, Valor, 0);
+                int Nodo = Integer.parseInt(nodoInicioTextField.getText());
+                float Valor = 0f;
+                OpenList paquito = new OpenList(Nodo, Nodo, Valor, null);
                 openLists.add(paquito);
                 tableViewAbierta.setItems(openLists);
-                int nodo = Nodo;
-                int padre = 0;
-                CloseList camaron = new CloseList(nodo, padre, 0);
+                Integer padre = null;
+                CloseList camaron = new CloseList(Nodo, padre, null);
                 closeLists.add(camaron);
                 tableViewCerrada.setItems(closeLists);
                 LAID = Nodo;
             } else ObtenerListaabiertaa(LAID);
         } while (LAID != fin);
-        for(Nodo nodo : Node){
-            for (CloseList lista : closeLists){
-                if(nodo.getId()  == lista.getNodo()){
-
-                    nodo.getNodo().setFill(Color.RED);
-                }
-            }
-        }
         for(Linea linea : Linea)
         {
             for(CloseList lista : closeLists)
             {
-                if(linea.getID() == lista.getLineaID())
+                if(Objects.equals(linea.getID(), lista.getLineaID()))
                 {
-                    linea.getLain().setStroke(Color.RED);
+                    System.out.println(lista.getLineaID());
+                    linea.getLain().setStroke(Color.BLUE);
                 }
             }
         }
 
+        for(Nodo nodo : Node){
+            for (CloseList lista : closeLists){
+                if(Objects.equals(nodo.getId(), lista.getNodo())){
+
+                    nodo.getNodo().setFill(Color.GREEN);
+                }
+            }
+        }
+
+
     }
 
     public void ObtenerListaabiertaa(Integer ID){
+        int i = 0;
         double menor = 10000f;
         for(Linea linea : Linea) {
             if (Objects.equals(ID, linea.getPadreA()) || Objects.equals(ID, linea.getPadreB()))
@@ -152,7 +204,9 @@ public class HelloController implements Initializable
                     menor = valor;
                 }
             }
+            i++;
         }
+
         int nodo =0;
         for(OpenList list : openLists) {
             if(list.getFn()==menor) {
@@ -164,8 +218,6 @@ public class HelloController implements Initializable
                 tableViewCerrada.setItems(closeLists);
             }
         }
-
-        System.out.println("Terminan las Listas");
         LAID = nodo;
     }
 
